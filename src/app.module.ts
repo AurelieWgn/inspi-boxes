@@ -11,6 +11,8 @@ import { UsersService } from './users/users.service';
 import { ChannelModule } from './channel/channel.module';
 import { BoxModule } from './box/box.module';
 import { NoteModule } from './note/note.module';
+import { ChannelUserModule } from './channel_user/channel_user.module';
+import { BoxUserModule } from './box_user/box_user.module';
 
 @Module({
   imports: [
@@ -29,6 +31,8 @@ import { NoteModule } from './note/note.module';
     ChannelModule,
     BoxModule,
     NoteModule,
+    ChannelUserModule,
+    BoxUserModule,
     // modules here
   ],
 

@@ -1,4 +1,6 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import { BelongsToMany, Column, Model, Table } from 'sequelize-typescript';
+import { Channel } from 'src/channel/channel.model';
+import { Channel_user } from 'src/channel_user/channel_user.model';
 
 @Table
 export class User extends Model {
@@ -10,4 +12,7 @@ export class User extends Model {
 
   @Column
   password: string;
+
+  @BelongsToMany(() => Channel, () => Channel_user)
+  channels: Channel[];
 }

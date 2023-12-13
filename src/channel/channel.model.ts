@@ -1,6 +1,14 @@
 import { IsNotEmpty } from 'class-validator';
-import { Column, HasMany, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsToMany,
+  Column,
+  HasMany,
+  Model,
+  Table,
+} from 'sequelize-typescript';
 import { Box } from 'src/box/box.model';
+import { Channel_user } from 'src/channel_user/channel_user.model';
+import { User } from 'src/users/users.model';
 
 @Table
 export class Channel extends Model {
@@ -19,4 +27,7 @@ export class Channel extends Model {
   // SequelizeEagerLoadingError: Box is not associated to Channel!
   @HasMany(() => Box)
   boxes: Box[];
+
+  @BelongsToMany(() => User, () => Channel_user)
+  users: User[];
 }
