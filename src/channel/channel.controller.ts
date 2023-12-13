@@ -1,6 +1,8 @@
 import {
   Body,
   Controller,
+  Get,
+  Param,
   Post,
   UsePipes,
   ValidationPipe,
@@ -16,5 +18,10 @@ export class ChannelController {
   @Post()
   async createUser(@Body() newChannel: Channel) {
     return await this.channelsServices.create(newChannel);
+  }
+
+  @Get(':id')
+  async findById(@Param('id') id: number): Promise<Channel> {
+    return await this.channelsServices.findById(id);
   }
 }

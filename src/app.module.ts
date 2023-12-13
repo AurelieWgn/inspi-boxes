@@ -10,6 +10,7 @@ import { AuthService } from './auth/auth.service';
 import { UsersService } from './users/users.service';
 import { ChannelModule } from './channel/channel.module';
 import { BoxModule } from './box/box.module';
+import { NoteModule } from './note/note.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { BoxModule } from './box/box.module';
     UsersModule,
     ChannelModule,
     BoxModule,
+    NoteModule,
     // modules here
   ],
 

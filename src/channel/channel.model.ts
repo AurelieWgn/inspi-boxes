@@ -15,6 +15,8 @@ export class Channel extends Model {
   @Column
   private: boolean;
 
+  // To avoid error for the channel requests who include associate Boxes
+  // SequelizeEagerLoadingError: Box is not associated to Channel!
   @HasMany(() => Box)
   boxes: Box[];
 }

@@ -3,10 +3,12 @@ import {
   BelongsTo,
   Column,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
 import { Channel } from 'src/channel/channel.model';
+import { Note } from 'src/note/note.model';
 import { User } from 'src/users/users.model';
 
 @Table
@@ -29,4 +31,7 @@ export class Box extends Model {
 
   @BelongsTo(() => Channel)
   channel: Channel;
+
+  @HasMany(() => Note)
+  notes: Note[];
 }

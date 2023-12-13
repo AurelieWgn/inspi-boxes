@@ -1,6 +1,8 @@
 import {
   Body,
   Controller,
+  Get,
+  Param,
   Post,
   UsePipes,
   ValidationPipe,
@@ -16,5 +18,10 @@ export class BoxController {
   @Post()
   async createUser(@Body() newBox: Box) {
     return await this.boxsServices.create(newBox);
+  }
+
+  @Get(':id')
+  async findById(@Param('id') id: number): Promise<Box> {
+    return await this.boxsServices.findById(id);
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Channel } from './channel.model';
 import { InjectModel } from '@nestjs/sequelize';
+import { Box } from 'src/box/box.model';
 
 @Injectable()
 export class ChannelService {
@@ -16,5 +17,12 @@ export class ChannelService {
     } catch (error) {
       return error;
     }
+  }
+
+  async findById(channelId: number): Promise<Channel | undefined> {
+    return await this.channelModel.findOne({
+      where: { id: channelId },
+      include: [Box],
+    });
   }
 }
