@@ -1,6 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
 import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
-
 import { Channel } from 'src/channel/channel.model';
 import { User } from 'src/users/users.model';
 

@@ -13,6 +13,10 @@ export class BoxService {
     private boxUserModel: typeof Box_user,
   ) {}
 
+  async findAll(): Promise<Box[]> {
+    return this.boxModel.findAll();
+  }
+
   async create(newBox: Box, userId: number) {
     try {
       const resp = await this.boxModel.create({ ...newBox });
@@ -32,5 +36,29 @@ export class BoxService {
       where: { id: boxId },
       include: [Note],
     });
+  }
+
+  async update(id: number, box: Box): Promise<Box> {
+    await this.boxModel.update(
+      { ...box },
+      {
+        where: {
+          id: +id,
+        },
+      },
+    );
+
+    return box;
+  }
+
+  async delete(id: string): Promise<Box[]> {
+    await this.boxModel.destroy({
+      where: { id: +id },
+    });
+    await this.boxUserModel.destroy({
+      where: { boxId: +id },
+    });
+
+    return this.findAll();
   }
 }

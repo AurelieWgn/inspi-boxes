@@ -23,4 +23,29 @@ export class NoteService {
       where: { id: noteId },
     });
   }
+
+  async update(id: number, note: Note): Promise<Note> {
+    await this.noteModel.update(
+      { ...note },
+      {
+        where: {
+          id: +id,
+        },
+      },
+    );
+
+    return note;
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.noteModel.destroy({
+      where: { id: +id },
+    });
+  }
+
+  async findByBoxId(boxId: number): Promise<Note[] | undefined> {
+    return await this.noteModel.findAll({
+      where: { boxId: boxId },
+    });
+  }
 }

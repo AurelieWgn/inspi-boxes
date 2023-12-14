@@ -37,4 +37,23 @@ export class UsersService {
 
     this.userModel.create({ ...encryptednNewUser });
   }
+
+  async update(id: number, user: User): Promise<User> {
+    await this.userModel.update(
+      { ...user },
+      {
+        where: {
+          id: +id,
+        },
+      },
+    );
+
+    return user;
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.userModel.destroy({
+      where: { id: +id },
+    });
+  }
 }

@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
+  Patch,
   Post,
   Request,
   UseGuards,
@@ -17,6 +19,11 @@ import { AuthGuard } from 'src/auth/auth.guard';
 export class BoxController {
   constructor(private readonly boxsServices: BoxService) {}
 
+  @Get()
+  async findAll(): Promise<Box[]> {
+    return await this.boxsServices.findAll();
+  }
+
   @UsePipes(new ValidationPipe({}))
   @UseGuards(AuthGuard)
   @Post()
@@ -27,5 +34,15 @@ export class BoxController {
   @Get(':id')
   async findById(@Param('id') id: number): Promise<Box> {
     return await this.boxsServices.findById(id);
+  }
+
+  @Patch(':id')
+  async updateBox(@Param('id') id: number, @Body() box: Box): Promise<Box> {
+    return await this.boxsServices.update(id, box);
+  }
+
+  @Delete(':id')
+  async deleteBox(@Param('id') id: string) {
+    return await this.boxsServices.delete(id);
   }
 }

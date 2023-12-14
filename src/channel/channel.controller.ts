@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
+  Patch,
   Post,
   Request,
   UseGuards,
@@ -28,5 +30,18 @@ export class ChannelController {
   @Get(':id')
   async findById(@Param('id') id: number): Promise<Channel> {
     return await this.channelsServices.findById(id);
+  }
+
+  @Patch(':id')
+  async updateChannel(
+    @Param('id') id: number,
+    @Body() channel: Channel,
+  ): Promise<Channel> {
+    return await this.channelsServices.update(id, channel);
+  }
+
+  @Delete(':id')
+  async deleteChannel(@Param('id') id: string) {
+    return await this.channelsServices.delete(id);
   }
 }

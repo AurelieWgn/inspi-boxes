@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
+  Patch,
   Post,
   UsePipes,
   ValidationPipe,
@@ -23,5 +25,20 @@ export class NoteController {
   @Get(':id')
   async findById(@Param('id') id: number): Promise<Note> {
     return await this.notesServices.findById(id);
+  }
+
+  @Get(':id')
+  async findByBoxId(@Param('id') boxId: number): Promise<Note[]> {
+    return await this.notesServices.findByBoxId(boxId);
+  }
+
+  @Patch(':id')
+  async updateNote(@Param('id') id: number, @Body() note: Note): Promise<Note> {
+    return await this.notesServices.update(id, note);
+  }
+
+  @Delete(':id')
+  async deleteNote(@Param('id') id: string) {
+    return await this.notesServices.delete(id);
   }
 }
