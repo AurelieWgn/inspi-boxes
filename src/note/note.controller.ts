@@ -6,17 +6,20 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { NoteService } from './note.service';
 import { Note } from './note.model';
+import { AuthGuard } from 'src/auth/auth.guard';
 
+@UsePipes(new ValidationPipe({}))
+@UseGuards(AuthGuard)
 @Controller('note')
 export class NoteController {
   constructor(private readonly notesServices: NoteService) {}
 
-  @UsePipes(new ValidationPipe({}))
   @Post()
   async createUser(@Body() newNote: Note) {
     return await this.notesServices.create(newNote);

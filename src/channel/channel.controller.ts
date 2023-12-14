@@ -15,12 +15,12 @@ import { ChannelService } from './channel.service';
 import { Channel } from './channel.model';
 import { AuthGuard } from 'src/auth/auth.guard';
 
+@UsePipes(new ValidationPipe({}))
+@UseGuards(AuthGuard)
 @Controller('channel')
 export class ChannelController {
   constructor(private readonly channelsServices: ChannelService) {}
 
-  @UsePipes(new ValidationPipe({}))
-  @UseGuards(AuthGuard)
   @Post()
   async createChannel(@Body() newChannel: Channel, @Request() req) {
     console.log('req', req.user);
